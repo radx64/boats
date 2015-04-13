@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>This should be some catchy title</title>
+    <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+    <script src="boat.js"></script>
+    <script>
+        var stage;
+        var running = true;
+        var debug;
+        var boat;
+
+        function keyPressed(event)
+        {
+            boat.processKey(event);
+        }
+
+        function createObjects()
+        {
+            boat = new Boat(stage, 150, 150);
+            debug = stage.addChild(new createjs.Text("", "12px monospace", "#000"));
+            debug.lineHeight = 15;
+            debug.textBaseline = "top";
+            debug.x = 10;
+            debug.y = stage.canvas.height-debug.lineHeight*3-10;
+        }
+
+        function tick(event) {
+            if(createjs.Ticker.getPaused()) return;
+            debug.text = "Event_delta: " + event.delta;
+            boat.simulate();
+            stage.update(event);
+        }
+        function init()
+        {
+            stage = new createjs.Stage("simulationCanvas");
+            createObjects();
+            createjs.Ticker.on("tick", tick);
+            createjs.Ticker.setFPS(30);
+
+            this.document.onkeydown = keyPressed;   
+        }
+
+        function togglePause()
+        {
+            var paused = !createjs.Ticker.getPaused();
+            createjs.Ticker.setPaused(paused);
+            document.getElementById("pauseBtn").value = paused ? "Resume simulation" : "Pause simulation";
+        }
+    </script>
+</head>
+<body onload="init(); " bgcolor="#33CCFF">
+<input type="button" value="Pause simulation" id="pauseBtn" onclick="togglePause();"><br>
+
+<table width="100%">
+  <tr>
+    <td> 
+        <canvas id="simulationCanvas" width="500" height="500">
+            alternate content
+        </canvas>
+    </td>
+    <td>
+        Speed:<br>
+        <input type="text" id="boat_speed"><br>
+        Direction:<br>
+        <input type="text" id="boat_direction"><br>
+        SailDir:<br>
+        <input type="text" id="sail_dir"><br>
+        RudderDir:<br>
+        <input type="text" id="rudder_dir"><br>
+        X:<br>
+        <input type="text" id="boat_x"><br>
+        Y:<br>
+        <input type="text" id="boat_y"><br>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
