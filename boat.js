@@ -46,12 +46,15 @@ function Boat(stage, x, y)
         this.imageObject.y = this.y;
         this.sail.rotation = this.sail_direction;
         this.rudder.rotation = this.rudder_direction;
-        this.imageObject.rotation += 1;
+        this.imageObject.rotation = this.direction;
     }
 
     this.simulate = function()
     {
-        this.redrawBoat()
+        this.direction < 360 ? this.direction += 1 : this.direction-=360;   //some fancy spining in place :)
+        this.redrawBoat(); 
+
+        /* Code below is only for testing purposes. Will be removed when ... probably never :) Nah. Will be.*/
         document.getElementById("boat_speed").value = this.speed;
         document.getElementById("boat_direction").value = this.direction;
         document.getElementById("sail_dir").value = this.sail_direction;
