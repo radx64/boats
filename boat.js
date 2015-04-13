@@ -79,7 +79,7 @@ function Boat(stage, x, y)
                 break;
             case KEYCODE_DOWN: 
                 this.sail_direction -= 5;
-                if(this.sail_direction < 0) { this.sail_direction = 355.0;}
+                if(this.sail_direction < 0) { this.sail_direction = 360 + this.sail_direction;}
                 break;
         }
     }
