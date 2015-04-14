@@ -62,7 +62,10 @@ function Boat(stage, x, y)
 
         this.direction -= this.rudder_direction * this.rudderForceCoeficient * this.speed * event.delta/100.0;   
 
-        this.direction > 360 ? this.direction = 0 : true ;   //some fancy spining in place :)
+        if (this.direction > 360 || this.direction < 0)
+        {
+            this.direction = 0; // to keep direction always in range 0..360
+        }
 
         this.longitudinalForce = this.sailForce - this.speed * this.maxDragForce;
 
