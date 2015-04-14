@@ -23,13 +23,13 @@
             debug.lineHeight = 15;
             debug.textBaseline = "top";
             debug.x = 10;
-            debug.y = stage.canvas.height-debug.lineHeight*3-10;
+            debug.y = debug.lineHeight*3-10;
         }
 
         function tick(event) {
             if(createjs.Ticker.getPaused()) return;
             debug.text = "Event_delta: " + event.delta;
-            boat.simulate();
+            boat.simulate(event);
             stage.update(event);
         }
         function init()
@@ -56,13 +56,15 @@
 <table width="100%">
   <tr>
     <td> 
-        <canvas id="simulationCanvas" width="500" height="500">
+        <canvas id="simulationCanvas" width="1000" height="600">
             alternate content
         </canvas>
     </td>
     <td>
         Speed:<br>
         <input type="text" id="boat_speed"><br>
+        Longitudinal force:<br>
+        <input type="text" id="longitudinal_force"><br>
         Direction:<br>
         <input type="text" id="boat_direction"><br>
         SailDir:<br>

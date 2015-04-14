@@ -1,6 +1,7 @@
 function Boat(stage, x, y)
 {
-    var KEYCODE_LEFT = 37, 
+    var KEYCODE_SPACE = 32,
+        KEYCODE_LEFT = 37, 
         KEYCODE_RIGHT = 39,
         KEYCODE_UP = 38, 
         KEYCODE_DOWN = 40;
@@ -11,6 +12,13 @@ function Boat(stage, x, y)
     this.sail_direction = 0;
     this.x = x;
     this.y = y;
+
+    this.sailForce = 0.0;               // this force is applied in front direction of boat by sail
+    this.maxDragForce = 0.001;          // this force is maximum drag force applied in rear direction of boat
+    this.longitudinalForce = 0.0;       // this force is resulting force after adding sail force to drag force
+
+
+    this.rudderForceCoeficient = 0.03;
 
     this.dot =  new createjs.Shape();
     this.dot.graphics.beginFill("red").drawCircle(0,0,5);
@@ -49,13 +57,50 @@ function Boat(stage, x, y)
         this.imageObject.rotation = this.direction;
     }
 
-    this.simulate = function()
+    this.simulate = function(event)
     {
-        this.direction < 360 ? this.direction += 1 : this.direction-=360;   //some fancy spining in place :)
+
+        this.direction -= this.rudder_direction * this.rudderForceCoeficient * this.speed * event.delta/100.0;   
+
+        this.direction > 360 ? this.direction = 0 : true ;   //some fancy spining in place :)
+
+        this.longitudinalForce = this.sailForce - this.speed * this.maxDragForce;
+
+        this.speed += this.longitudinalForce * event.delta/2.0;
+
+        directionInRadians = this.direction*Math.PI/180.0;
+
+        this.x += Math.sin(directionInRadians) * this.speed;
+        this.y -= Math.cos(directionInRadians) * this.speed;
+
         this.redrawBoat(); 
 
+        /* jumping over borders */
+        if (this.x < 0) 
+        {
+            this.x = stage.canvas.width;
+        }
+
+        if (this.y < 0) 
+        {
+            this.y = stage.canvas.height;
+        }
+
+        if (this.x > stage.canvas.width) 
+        {
+            this.x = 0;
+        }
+
+        if (this.y > stage.canvas.height) 
+        {
+            this.y = 0;
+        }
+
+        this.sailForce = 0.000;     //to stop powering boat DEBUG puropses only
+        
         /* Code below is only for testing purposes. Will be removed when ... probably never :) Nah. Will be.*/
         document.getElementById("boat_speed").value = this.speed;
+        document.getElementById("longitudinal_force").value = this.longitudinalForce;
         document.getElementById("boat_direction").value = this.direction;
         document.getElementById("sail_dir").value = this.sail_direction;
         document.getElementById("rudder_dir").value = this.rudder_direction;
@@ -80,6 +125,9 @@ function Boat(stage, x, y)
             case KEYCODE_DOWN: 
                 this.sail_direction -= 5;
                 if(this.sail_direction < 0) { this.sail_direction = 360 + this.sail_direction;}
+                break;
+            case KEYCODE_SPACE:
+                this.sailForce = 0.1;       //this is only for DEBUG purposes. Sail force will be calculated with some wind force fiddling
                 break;
         }
     }
