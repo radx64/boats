@@ -1,6 +1,6 @@
 function World(stage)
 {
-	this.windSpeed = 0;
+	this.windSpeed = 0.03;
 	this.windDirection = 0;
 
 	this.windGraphics = new createjs.Container();
@@ -17,7 +17,7 @@ function World(stage)
 
 	this.simulate = function(event)
 	{
-		this.windDirection += 1;
+		this.windDirection += 0.1;
 
 		if (this.windDirection >= 360)
 		{

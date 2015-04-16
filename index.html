@@ -26,7 +26,7 @@
         function createObjects()
         {
             world = new World(stage);
-            boat = new Boat(stage, 150, 150);
+            boat = new Boat(stage, world, 150, 150);
             debug = stage.addChild(new createjs.Text("", "12px monospace", "#000"));
             debug.lineHeight = 15;
             debug.textBaseline = "top";
@@ -81,6 +81,10 @@
         <input type="text" id="sail_dir"><br>
         Absolute SailDir:<br>
         <input type="text" id="abs_sail_dir"><br>
+        Wind force applied to sail:<br>
+        <input type="text" id="wind_force"><br>
+        Wind force applied to boat longitudinal:<br>
+        <input type="text" id="wind_longitudinal_force"><br>        
         RudderDir:<br>
         <input type="text" id="rudder_dir"><br>
         X:<br>
