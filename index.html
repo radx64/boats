@@ -5,19 +5,27 @@
     <title>This should be some catchy title</title>
     <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
     <script src="boat.js"></script>
+    <script src="world.js"></script>
     <script>
         var stage;
-        var running = true;
         var debug;
         var boat;
+        var world;
+        var keys = {};
 
-        function keyPressed(event)
+        function keyDown(event)
         {
-            boat.processKey(event);
+            keys[event.keyCode] = true;
+        }
+
+        function keyUp(event)
+        {
+            delete keys[event.keyCode];
         }
 
         function createObjects()
         {
+            world = new World(stage);
             boat = new Boat(stage, 150, 150);
             debug = stage.addChild(new createjs.Text("", "12px monospace", "#000"));
             debug.lineHeight = 15;
@@ -29,7 +37,8 @@
         function tick(event) {
             if(createjs.Ticker.getPaused()) return;
             debug.text = "Event_delta: " + event.delta;
-            boat.simulate(event);
+            world.simulate(event);
+            boat.simulate(event, keys);
             stage.update(event);
         }
         function init()
@@ -37,9 +46,10 @@
             stage = new createjs.Stage("simulationCanvas");
             createObjects();
             createjs.Ticker.on("tick", tick);
-            createjs.Ticker.setFPS(30);
+            createjs.Ticker.setFPS(45);
 
-            this.document.onkeydown = keyPressed;   
+            this.document.onkeydown = keyDown;
+            this.document.onkeyup = keyUp;  
         }
 
         function togglePause()
@@ -69,12 +79,18 @@
         <input type="text" id="boat_direction"><br>
         SailDir:<br>
         <input type="text" id="sail_dir"><br>
+        Absolute SailDir:<br>
+        <input type="text" id="abs_sail_dir"><br>
         RudderDir:<br>
         <input type="text" id="rudder_dir"><br>
         X:<br>
         <input type="text" id="boat_x"><br>
         Y:<br>
         <input type="text" id="boat_y"><br>
+        Wind speed:<br>
+        <input type="text" id="wind_speed"><br>
+        Wind direction:<br>
+        <input type="text" id="wind_dir"><br>
     </td>
   </tr>
 </table>
