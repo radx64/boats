@@ -11,7 +11,7 @@ function Boat(stage, world, x, y)
     this.speed = 0;
     this.direction = 0;
     this.rudder_direction = 0;
-    this.sail_direction = 0;
+    this.sail_direction = 180;
     this.absolute_sail_direction = 0;
     this.x = x;
     this.y = y;
@@ -26,17 +26,23 @@ function Boat(stage, world, x, y)
     this.rudderForceCoeficient = 0.04;
 
     this.dot =  new createjs.Shape();
-    this.dot.graphics.beginFill("red").drawCircle(0,0,5);
+    this.dot.graphics.beginFill("red").drawCircle(0,0,3);
 
     this.sprite = new createjs.Bitmap("boat_top_scaled.png");
     this.sprite.x = -37;    // this should be done dynamicaly but need to use preloader for images, 
                             // cause bitmap is not loaded yet and can't get here width and heigth
     this.sprite.y = -90; 
 
-    this.sail = new createjs.Shape();
-    this.sail.graphics.beginFill("green").drawRect(-2, 0, 4, -70);
-    this.sail.x = 0;
-    this.sail.y = 0;
+    this.sail = new createjs.Container();
+
+    this.sailPlane = new createjs.Shape();
+    this.sailPlane.graphics.beginFill("white").bezierCurveTo(0,-80,40,-40, 0,0);
+
+    this.sailBar = new createjs.Shape();
+    this.sailBar.graphics.beginFill("green").drawRect(-2, 0, 4, -80);
+
+    this.sail.addChild(this.sailPlane);
+    this.sail.addChild(this.sailBar);
 
     this.rudder = new createjs.Shape();
     this.rudder.graphics.beginFill("blue").drawRect(-2, 0, 4, 20);
@@ -44,7 +50,7 @@ function Boat(stage, world, x, y)
     this.rudder.y = 85;
 
     this.debugBox = new createjs.Shape();
-    this.debugBox.graphics.beginStroke("black").drawRect(-37, -90, 74, 180);
+    this.debugBox.graphics.beginStroke("red").drawRect(-37, -90, 74, 180);
 
     this.imageObject = new createjs.Container();
     this.imageObject.addChild(this.sprite);
@@ -85,9 +91,9 @@ function Boat(stage, world, x, y)
         }
 
         this.absolute_sail_direction = this.sail_direction + this.direction;
-        this.windForce = Math.abs(Math.sin(toRadians(this.absolute_sail_direction - this.world.windDirection))) * this.world.windSpeed;
+        this.windForce = Math.sin(toRadians(this.absolute_sail_direction - this.world.windDirection)) * this.world.windSpeed;
         this.windLongitudinalForce = Math.cos(toRadians(180.0 + this.direction - this.world.windDirection)) * 0.4;
-        this.sailForce = this.windForce * this.windLongitudinalForce;
+        this.sailForce = Math.abs(this.windForce) * this.windLongitudinalForce;
         this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.1)) * this.maxDragForce;
         this.speed += this.longitudinalForce * event.delta/2.0;
         this.direction -= this.rudder_direction * this.rudderForceCoeficient * this.speed * event.delta/100.0;   
@@ -97,6 +103,9 @@ function Boat(stage, world, x, y)
         this.y -= Math.cos(directionInRadians) * this.speed;
 
         if (this.speed < 0.05) this.speed = 0.0;
+
+        this.sailPlane.graphics.clear();
+        this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, 1200 *  this.windForce, -40, 0,0);
 
         this.redrawBoat(); 
 
