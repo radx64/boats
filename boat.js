@@ -63,8 +63,8 @@ function Boat(stage, world, x, y)
 
     this.redrawBoat = function()
     {
-        this.imageObject.x = this.x;
-        this.imageObject.y = this.y;
+        this.imageObject.x = stage.canvas.width/2;
+        this.imageObject.y = stage.canvas.height/2;
         this.sail.rotation = this.sail_direction;
         this.rudder.rotation = this.rudder_direction;
         this.imageObject.rotation = this.direction;
@@ -101,6 +101,9 @@ function Boat(stage, world, x, y)
         directionInRadians = toRadians(this.direction);
         this.x += Math.sin(directionInRadians) * this.speed;
         this.y -= Math.cos(directionInRadians) * this.speed;
+
+        this.world.x_shift = - this.x;
+        this.world.y_shift = - this.y;
 
         if (this.speed < 0.05) this.speed = 0.0;
 
