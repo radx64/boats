@@ -110,28 +110,7 @@ function Boat(stage, world, x, y)
         this.sailPlane.graphics.clear();
         this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, 1200 *  this.windForce, -40, 0,0);
 
-        this.redrawBoat(); 
-
-        /* jumping over borders */
-        if (this.x < 0) 
-        {
-            this.x = stage.canvas.width;
-        }
-
-        if (this.y < 0) 
-        {
-            this.y = stage.canvas.height;
-        }
-
-        if (this.x > stage.canvas.width) 
-        {
-            this.x = 0;
-        }
-
-        if (this.y > stage.canvas.height) 
-        {
-            this.y = 0;
-        }
+        this.redrawBoat();
         
         /* Code below is only for testing purposes. Will be removed when ... probably never :) Nah. Will be.*/
         document.getElementById("boat_speed").value = this.speed;
