@@ -17,7 +17,7 @@ function World(stage)
 
 	this.simulate = function(event)
 	{
-		this.windDirection += 0.1;
+		this.windDirection += 0.4;
 
 		if (this.windDirection >= 360)
 		{

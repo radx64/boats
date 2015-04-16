@@ -129,8 +129,6 @@ function Boat(stage, world, x, y)
         {
             this.y = 0;
         }
-
-        this.sailForce = 0.000;     //to stop powering boat DEBUG puropses only
         
         /* Code below is only for testing purposes. Will be removed when ... probably never :) Nah. Will be.*/
         document.getElementById("boat_speed").value = this.speed;
@@ -142,7 +140,7 @@ function Boat(stage, world, x, y)
         document.getElementById("boat_x").value = this.x;
         document.getElementById("boat_y").value = this.y;
         document.getElementById("wind_force").value = this.windForce;
-        document.getElementById("wind_longitudinal_force").value = this.windLongitudinalForce;
+        document.getElementById("sail_force").value = this.sailForce;
     }
 
     this.processKey = function(keys)
@@ -159,13 +157,13 @@ function Boat(stage, world, x, y)
 
         if(keys[KEYCODE_UP])
         {
-                this.sail_direction += 1;
+                this.sail_direction += 2;
                 if(this.sail_direction >= 360) { this.sail_direction = this.sail_direction - 360.0;}  
         }
 
         if(keys[KEYCODE_DOWN])
         {
-                this.sail_direction -= 1;
+                this.sail_direction -= 2;
                 if(this.sail_direction < 0) { this.sail_direction = 360 + this.sail_direction;}    
         }
 
