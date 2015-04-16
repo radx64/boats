@@ -49,15 +49,15 @@ function Boat(stage, world, x, y)
     this.rudder.x = 0;
     this.rudder.y = 85;
 
-    this.debugBox = new createjs.Shape();
-    this.debugBox.graphics.beginStroke("red").drawRect(-37, -90, 74, 180);
+    //this.debugBox = new createjs.Shape();
+    //this.debugBox.graphics.beginStroke("red").drawRect(-37, -90, 74, 180);
 
     this.imageObject = new createjs.Container();
     this.imageObject.addChild(this.sprite);
     this.imageObject.addChild(this.sail);
     this.imageObject.addChild(this.rudder);
     this.imageObject.addChild(this.dot);  
-    this.imageObject.addChild(this.debugBox); 
+    //this.imageObject.addChild(this.debugBox); 
 
     stage.addChild(this.imageObject);
 
@@ -108,6 +108,7 @@ function Boat(stage, world, x, y)
         if (this.speed < 0.05) this.speed = 0.0;
 
         this.sailPlane.graphics.clear();
+        this.sailPlane.graphics.beginStroke("black");
         this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, (Math.random()*4) + 600 *  this.windForce, -40, 0,0);
 
         this.redrawBoat();
