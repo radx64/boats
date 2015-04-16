@@ -64,11 +64,15 @@ function Boat(stage, world, x, y)
         this.imageObject.rotation = this.direction;
     }
 
+    toRadians = function(degrees)
+    {
+        return degrees*Math.PI/180.0
+    }
+
     this.simulate = function(event, keys)
     {
         this.processKey(keys);
         
-        this.direction -= this.rudder_direction * this.rudderForceCoeficient * this.speed * event.delta/100.0;   
 
         if (this.direction >= 360 )
         {
@@ -81,19 +85,14 @@ function Boat(stage, world, x, y)
         }
 
         this.absolute_sail_direction = this.sail_direction + this.direction;
-
-        this.windForce = Math.abs(Math.sin((this.absolute_sail_direction - this.world.windDirection)*Math.PI/180.0)) * this.world.windSpeed;
-
-        this.windLongitudinalForce = Math.cos((180.0 + this.direction - this.world.windDirection)*Math.PI/180.0) * 0.4;
-
+        this.windForce = Math.abs(Math.sin(toRadians(this.absolute_sail_direction - this.world.windDirection))) * this.world.windSpeed;
+        this.windLongitudinalForce = Math.cos(toRadians(180.0 + this.direction - this.world.windDirection)) * 0.4;
         this.sailForce = this.windForce * this.windLongitudinalForce;
-
         this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.1)) * this.maxDragForce;
-
         this.speed += this.longitudinalForce * event.delta/2.0;
+        this.direction -= this.rudder_direction * this.rudderForceCoeficient * this.speed * event.delta/100.0;   
 
-        directionInRadians = this.direction*Math.PI/180.0;
-
+        directionInRadians = toRadians(this.direction);
         this.x += Math.sin(directionInRadians) * this.speed;
         this.y -= Math.cos(directionInRadians) * this.speed;
 
