@@ -3,7 +3,7 @@ function World(stage)
 	this.x_shift = 0;
 	this.y_shift = 0;
 
-	this.windSpeed = 0.03;
+	this.windSpeed = 0.06;
 	this.windDirection = 0;
 
 	this.windGraphics = new createjs.Container();

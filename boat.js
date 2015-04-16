@@ -92,7 +92,7 @@ function Boat(stage, world, x, y)
 
         this.absolute_sail_direction = this.sail_direction + this.direction;
         this.windForce = Math.sin(toRadians(this.absolute_sail_direction - this.world.windDirection)) * this.world.windSpeed;
-        this.windLongitudinalForce = Math.cos(toRadians(180.0 + this.direction - this.world.windDirection)) * 0.4;
+        this.windLongitudinalForce = Math.cos(toRadians(180.0 + this.direction - this.world.windDirection)) * 0.125;
         this.sailForce = Math.abs(this.windForce) * this.windLongitudinalForce;
         this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.1)) * this.maxDragForce;
         this.speed += this.longitudinalForce * event.delta/2.0;
@@ -108,7 +108,7 @@ function Boat(stage, world, x, y)
         if (this.speed < 0.05) this.speed = 0.0;
 
         this.sailPlane.graphics.clear();
-        this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, 1200 *  this.windForce, -40, 0,0);
+        this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, (Math.random()*4) + 600 *  this.windForce, -40, 0,0);
 
         this.redrawBoat();
         
