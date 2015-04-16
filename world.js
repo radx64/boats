@@ -4,7 +4,7 @@ function World(stage)
 	this.y_shift = 0;
 
 	this.windSpeed = 0.06;
-	this.windDirection = 0;
+	this.windDirection = 180;
 
 	this.windGraphics = new createjs.Container();
 	this.windGraphics.x = 100;

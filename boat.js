@@ -105,7 +105,7 @@ function Boat(stage, world, x, y)
         this.world.x_shift = - this.x;
         this.world.y_shift = - this.y;
 
-        if (this.speed < 0.05) this.speed = 0.0;
+        if (this.speed < 0.02) this.speed = 0.0;
 
         this.sailPlane.graphics.clear();
         this.sailPlane.graphics.beginStroke("black");
