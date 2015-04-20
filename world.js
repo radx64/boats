@@ -4,7 +4,7 @@ function World(stage)
 	this.y_shift = 0;
 
 	this.windSpeed = 0.06;
-	this.windDirection = 180;
+	this.windDirection = 210;
 
 	this.windGraphics = new createjs.Container();
 	this.windGraphics.x = 100;
@@ -25,7 +25,7 @@ function World(stage)
 	this.drawGrid = function()
 	{
 		this.grid.graphics.clear();
-		this.grid.graphics.beginStroke("blue");
+		this.grid.graphics.beginStroke("white");
 
 		for (var i = 0 ; i < stage.canvas.width / 100 + 1; ++i)
 		{
@@ -42,7 +42,7 @@ function World(stage)
 
 	this.simulate = function(event)
 	{
-		this.windDirection += 0.4;
+		//this.windDirection += 0.4;
 
 		if (this.windDirection >= 360)
 		{
@@ -54,7 +54,7 @@ function World(stage)
 			this.windDirection = 360 + this.windDirection;
 		}
 
-		this.windGraphics.rotation = this.windDirection + 180;
+		this.windGraphics.rotation = this.windDirection;
 
 		this.drawGrid();
 

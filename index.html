@@ -27,7 +27,7 @@
         {
             world = new World(stage);
             boat = new Boat(stage, world, 150, 150);
-            debug = stage.addChild(new createjs.Text("", "12px monospace", "#000"));
+            debug = stage.addChild(new createjs.Text("", "16px monospace", "#000"));
             debug.lineHeight = 15;
             debug.textBaseline = "top";
             debug.x = 10;
@@ -36,7 +36,7 @@
 
         function tick(event) {
             if(createjs.Ticker.getPaused()) return;
-            debug.text = "Event_delta: " + event.delta;
+            debug.text = "FPS: " + createjs.Ticker.getMeasuredFPS(createjs.Ticker.getTicks(false)).toFixed(1);
             world.simulate(event);
             boat.simulate(event, keys);
             stage.update(event);
@@ -84,7 +84,9 @@
         Wind force applied to sail:<br>
         <input type="text" id="wind_force"><br>
         Sail force:<br>
-        <input type="text" id="sail_force"><br>        
+        <input type="text" id="sail_force"><br>
+        Sail suction:<br>
+        <input type="text" id="sail_suction"><br>          
         RudderDir:<br>
         <input type="text" id="rudder_dir"><br>
         X:<br>

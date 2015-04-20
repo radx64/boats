@@ -92,11 +92,13 @@ function Boat(stage, world, x, y)
 
         this.absolute_sail_direction = this.sail_direction + this.direction;
         this.windForce = Math.sin(toRadians(this.absolute_sail_direction - this.world.windDirection)) * this.world.windSpeed;
-        this.windLongitudinalForce = Math.cos(toRadians(180.0 + this.direction - this.world.windDirection)) * 0.125;
+        this.windLongitudinalForce = Math.cos(toRadians(this.direction - this.world.windDirection)) * 0.125;
         this.sailForce = Math.abs(this.windForce) * this.windLongitudinalForce;
-        this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.1)) * this.maxDragForce;
+        this.sailSuctionForce = Math.cos(toRadians(this.absolute_sail_direction - this.world.windDirection + 20.0)) *0.001;
+        this.sailSuctionForce = this.sailSuctionForce > 0 ? this.sailSuctionForce : 0;
+        this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.2)) * this.maxDragForce + this.sailSuctionForce;
         this.speed += this.longitudinalForce * event.delta/2.0;
-        this.direction -= this.rudder_direction * this.rudderForceCoeficient * this.speed * event.delta/100.0;   
+        this.direction -= this.rudder_direction * this.rudderForceCoeficient * this.speed * event.delta/100.0;
 
         directionInRadians = toRadians(this.direction);
         this.x += Math.sin(directionInRadians) * this.speed;
@@ -105,11 +107,11 @@ function Boat(stage, world, x, y)
         this.world.x_shift = - this.x;
         this.world.y_shift = - this.y;
 
-        if (this.speed < 0.02) this.speed = 0.0;
+        if (this.speed < 0.0001) this.speed = 0.0;
 
         this.sailPlane.graphics.clear();
         this.sailPlane.graphics.beginStroke("black");
-        this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, (Math.random()*4) + 600 *  this.windForce, -40, 0,0);
+        this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, (Math.random()*6) - 600 *  this.windForce, -40, 0,0);
 
         this.redrawBoat();
         
@@ -124,30 +126,29 @@ function Boat(stage, world, x, y)
         document.getElementById("boat_y").value = this.y;
         document.getElementById("wind_force").value = this.windForce;
         document.getElementById("sail_force").value = this.sailForce;
+        document.getElementById("sail_suction").value = this.sailSuctionForce;
     }
 
     this.processKey = function(keys)
     {
         if(keys[KEYCODE_LEFT])
         {
-            if (this.rudder_direction < 75) { this.rudder_direction += 1;}   
+            if (this.rudder_direction < 75) this.rudder_direction += 2;  
         }
 
         if(keys[KEYCODE_RIGHT])
         {
-            if (this.rudder_direction > -75) { this.rudder_direction -= 1;}  
+            if (this.rudder_direction > -75) this.rudder_direction -= 2;  
         }
 
         if(keys[KEYCODE_UP])
         {
-                this.sail_direction += 2;
-                if(this.sail_direction >= 360) { this.sail_direction = this.sail_direction - 360.0;}  
+                if(this.sail_direction < 240) this.sail_direction += 2; 
         }
 
         if(keys[KEYCODE_DOWN])
         {
-                this.sail_direction -= 2;
-                if(this.sail_direction < 0) { this.sail_direction = 360 + this.sail_direction;}    
+                if(this.sail_direction > 120) this.sail_direction -= 2;
         }
 
         if(keys[KEYCODE_SPACE])
