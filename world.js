@@ -89,11 +89,11 @@ function World(stage)
 		this.drawGrid();
 		this.drawObstacles();
 
-		document.getElementById("wind_speed").value = this.windSpeed;
-        document.getElementById("wind_dir").value = this.windDirection;  
+		// document.getElementById("wind_speed").value = this.windSpeed;
+  //       document.getElementById("wind_dir").value = this.windDirection;  
 
-        document.getElementById("world_x_shift").value = this.x_shift;
-        document.getElementById("world_y_shift").value = this.y_shift;
+  //       document.getElementById("world_x_shift").value = this.x_shift;
+  //       document.getElementById("world_y_shift").value = this.y_shift;
 
 	}
 }
