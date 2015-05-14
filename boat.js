@@ -28,12 +28,15 @@ function Boat(stage, world, x, y)
     this.dot =  new createjs.Shape();
     this.dot.graphics.beginFill("red").drawCircle(0,0,3);
 
-    this.sprite = new createjs.Bitmap("boat_top_scaled.png");
+    this.sprite = new createjs.Bitmap("assets/boat_top_scaled.png");
     this.sprite.x = -37;    // this should be done dynamicaly but need to use preloader for images, 
                             // cause bitmap is not loaded yet and can't get here width and heigth
     this.sprite.y = -90; 
 
+    this.sprite.shadow = new createjs.Shadow("#005588", 10, 10, 30);
+
     this.sail = new createjs.Container();
+    this.sail.shadow = new createjs.Shadow("#000000", 5, 5, 30);
 
     this.sailPlane = new createjs.Shape();
     this.sailPlane.graphics.beginFill("white").bezierCurveTo(0,-80,40,-40, 0,0);
@@ -48,6 +51,7 @@ function Boat(stage, world, x, y)
     this.rudder.graphics.beginFill("blue").drawRect(-2, 0, 4, 20);
     this.rudder.x = 0;
     this.rudder.y = 85;
+    this.rudder.shadow = new createjs.Shadow("#000000", 2, 2, 5);
 
     //this.debugBox = new createjs.Shape();
     //this.debugBox.graphics.beginStroke("red").drawRect(-37, -90, 74, 180);
