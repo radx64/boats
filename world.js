@@ -6,6 +6,12 @@ function World(stage)
 	this.windSpeed = 0.06;
 	this.windDirection = 0;
 
+	this.windBack = new createjs.Shape()
+	this.windBack.graphics.beginFill("#222").drawRoundRectComplex(0,0,100,120,15,15,5,5);
+	this.windBack.x = 50;
+	this.windBack.y = 50;
+	this.windBack.shadow = new createjs.Shadow("#000000", 0, 0, 100);
+
 	this.windGraphics = new createjs.Container();
 	this.windGraphics.x = 100;
 	this.windGraphics.y = 100;
@@ -15,13 +21,16 @@ function World(stage)
 	this.windArrow.y = -30;
 
 	this.windGraphics.addChild(this.windArrow);
-	this.windGraphics.shadow = new createjs.Shadow("#005588", 10, 10, 30);
+	//
+
+	this.windSpeedText = new createjs.Text("0.0 knots", "16px monospace", "#FFF");
+	this.windSpeedText.x = 60;
+	this.windSpeedText.y = 145;
 
 	this.grid = new createjs.Shape();
 
 	stage.addChild(this.grid);
 
-	
 
 	this.obstaclesPos = [
 	[300,300],
@@ -41,12 +50,14 @@ function World(stage)
     	stage.addChild(this.obstacles[i]);
 	}
 
+	stage.addChild(this.windBack);
 	stage.addChild(this.windGraphics);
+	stage.addChild(this.windSpeedText);
 
 	this.drawGrid = function()
 	{
 		this.grid.graphics.clear();
-		this.grid.graphics.beginStroke("white");
+		this.grid.graphics.beginStroke("#0077AA");
 
 		for (var i = 0 ; i < stage.canvas.width / 100 + 1; ++i)
 		{
@@ -88,6 +99,7 @@ function World(stage)
 
 		this.drawGrid();
 		this.drawObstacles();
+		this.windSpeedText.text  = (this.windSpeed*234).toFixed(1) + " knots"
 
 		// document.getElementById("wind_speed").value = this.windSpeed;
   //       document.getElementById("wind_dir").value = this.windDirection;  

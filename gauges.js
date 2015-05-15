@@ -31,3 +31,63 @@ function createSpeedGauge()
 });
     speedGauge.draw();
 }
+
+function createSteerGauge()
+{
+    steerGauge = new Gauge({
+    renderTo    : 'steergauge',
+    width       : 200,
+    height      : 200,
+    glow        : true,
+    units       : 'steer',
+    title       : false,
+    minValue    : -50,
+    maxValue    : 50,
+    majorTicks  : ['-50','0','50'],
+    animation   : { delay : 10, duration : 10000, fn : 'elastic' },
+    minorTicks  : 2,
+    strokeTicks : true,
+    valueFormat : { int : 2, dec : 0 },
+    highlights  : [],
+    colors      : {
+        plate      : '#224',
+        majorTicks : '#f5f5f5',
+        minorTicks : '#ddd',
+        title      : '#fff',
+        units      : '#ccc',
+        numbers    : '#eee',
+        needle     : { start : 'rgba(240, 128, 128, 1)', end : 'rgba(255, 160, 122, .9)' }
+    }
+});
+    speedGauge.draw();
+}
+
+function createSailGauge()
+{
+    sailGauge = new Gauge({
+    renderTo    : 'sailgauge',
+    width       : 200,
+    height      : 200,
+    glow        : true,
+    units       : 'sail',
+    title       : false,
+    minValue    : -60,
+    maxValue    : 60,
+    majorTicks  : ['-60','0','60'],
+    animation   : { delay : 10, duration : 10000, fn : 'elastic' },
+    minorTicks  : 2,
+    strokeTicks : true,
+    valueFormat : { int : 2, dec : 0 },
+    highlights  : [],
+    colors      : {
+        plate      : '#242',
+        majorTicks : '#f5f5f5',
+        minorTicks : '#ddd',
+        title      : '#fff',
+        units      : '#ccc',
+        numbers    : '#eee',
+        needle     : { start : 'rgba(240, 128, 128, 1)', end : 'rgba(255, 160, 122, .9)' }
+    }
+});
+    speedGauge.draw();
+}

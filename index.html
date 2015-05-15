@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>This should be some catchy title</title>
+    <title>Boats</title>
     <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
     <script src="boat.js"></script>
     <script src="world.js"></script>
@@ -11,6 +11,8 @@
 
     <script>
         var speedGauge;
+        var steerGauge;
+        var sailGauge;
         var stage;
         var debug;
         var boat;
@@ -44,7 +46,9 @@
             world.simulate(event);
             boat.simulate(event, keys);
             stage.update(event);
-            speedGauge.setValue(boat.speed*4.0);
+            speedGauge.setValue(boat.speed*4.0); 
+            steerGauge.setValue(-boat.rudder_direction);
+            sailGauge.setValue(boat.sail_direction-180);
         }
         function init()
         {
@@ -53,6 +57,8 @@
             createjs.Ticker.on("tick", tick);
             createjs.Ticker.setFPS(45);
             createSpeedGauge();
+            createSteerGauge();
+            createSailGauge();
 
             this.document.onkeydown = keyDown;
             this.document.onkeyup = keyUp;  
@@ -64,12 +70,23 @@
             createjs.Ticker.setPaused(paused);
             document.getElementById("pauseBtn").value = paused ? "Resume simulation" : "Pause simulation";
         }
+
+        function changeWindDirection(direction)
+        {
+            world.windDirection = direction;
+        }
+
+        function changeWindSpeed(speed)
+        {
+            world.windSpeed = speed
+        }
+
     </script>
 
  
 
 </head>
-<body onload="init(); " bgcolor="#22BBEE">
+<body onload="init(); " bgcolor="#0099CC">
 <input type="button" value="Pause simulation" id="pauseBtn" onclick="togglePause();"><br>
 
 <table width="100%">
@@ -79,8 +96,13 @@
             alternate content
         </canvas>
     </td>
-   <!--  <td>
-        Speed:<br>
+   <td>
+   Direction:<br>
+    <input id="slide" type="range" min="0" max="359" step="1" value="180" onchange="changeWindDirection(this.value)"><br>
+    Speed:<br>
+    <input id="slide" type="range" min="0" max="0.08" step="0.001" value="0.01" onchange="changeWindSpeed(this.value)"><br>
+    </td>
+    <!--      Speed:<br>
         <input type="text" id="boat_speed"><br>
         Longitudinal force:<br>
         <input type="text" id="longitudinal_force"><br>
@@ -114,5 +136,7 @@
   </tr>
 </table>
 <canvas id="speedgauge"></canvas>
+<canvas id="steergauge"></canvas>
+<canvas id="sailgauge"></canvas>
 </body>
 </html>

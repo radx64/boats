@@ -137,12 +137,12 @@ function Boat(stage, world, x, y)
     {
         if(keys[KEYCODE_LEFT])
         {
-            if (this.rudder_direction < 75) this.rudder_direction += 2;  
+            if (this.rudder_direction < 50) this.rudder_direction += 2;  
         }
 
         if(keys[KEYCODE_RIGHT])
         {
-            if (this.rudder_direction > -75) this.rudder_direction -= 2;  
+            if (this.rudder_direction > -50) this.rudder_direction -= 2;  
         }
 
         if(keys[KEYCODE_UP])
@@ -157,7 +157,7 @@ function Boat(stage, world, x, y)
 
         if(keys[KEYCODE_SPACE])
         {
-            this.sailForce = 0.01; //this is only for DEBUG purposes. Sail force will be calculated with some wind force fiddling
+            this.sailForce = 1.01; //this is only for DEBUG purposes. Sail force will be calculated with some wind force fiddling
         }
     }
 }
