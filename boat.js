@@ -98,7 +98,7 @@ function Boat(stage, world, x, y)
         this.windForce = Math.sin(toRadians(this.absolute_sail_direction - this.world.windDirection)) * this.world.windSpeed;
         this.windLongitudinalForce = Math.cos(toRadians(this.direction - this.world.windDirection)) * 0.125;
         this.sailForce = Math.abs(this.windForce) * this.windLongitudinalForce;
-        this.sailSuctionForce = Math.cos(toRadians(this.absolute_sail_direction - this.world.windDirection + 20.0)) *0.001;
+        this.sailSuctionForce = Math.cos(toRadians(this.absolute_sail_direction - this.world.windDirection + 20.0)) * this.world.windSpeed *0.01;
         this.sailSuctionForce = this.sailSuctionForce > 0 ? this.sailSuctionForce : 0;
         this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.2)) * this.maxDragForce + this.sailSuctionForce;
         this.speed += this.longitudinalForce * event.delta/2.0;
