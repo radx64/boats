@@ -10,7 +10,7 @@ function World(stage)
 	this.windBack.graphics.beginFill("#222").drawRoundRectComplex(0,0,100,120,15,15,5,5);
 	this.windBack.x = 50;
 	this.windBack.y = 50;
-	this.windBack.shadow = new createjs.Shadow("#000000", 0, 0, 100);
+	this.windBack.shadow = new createjs.Shadow("#000000", 0, 0, 25);
 
 	this.windGraphics = new createjs.Container();
 	this.windGraphics.x = 100;
@@ -59,16 +59,19 @@ function World(stage)
 		this.grid.graphics.clear();
 		this.grid.graphics.beginStroke("#0077AA");
 
-		for (var i = 0 ; i < stage.canvas.width / 100 + 1; ++i)
+		var gridSize = 50;
+
+
+		for (var i = 0 ; i < stage.canvas.width / gridSize + 1; ++i)
 		{
-			this.grid.graphics.moveTo(i*100 + (this.x_shift % 100), 0);
-			this.grid.graphics.lineTo(i*100 + (this.x_shift % 100), stage.canvas.height);
+			this.grid.graphics.moveTo(i*gridSize + (this.x_shift % gridSize), 0);
+			this.grid.graphics.lineTo(i*gridSize + (this.x_shift % gridSize), stage.canvas.height);
 		}
 
-		for (var i = 0 ; i < stage.canvas.height / 100 + 1; ++i)
+		for (var i = 0 ; i < stage.canvas.height / gridSize + 1; ++i)
 		{
-			this.grid.graphics.moveTo(0,i*100 + (this.y_shift % 100));
-			this.grid.graphics.lineTo(stage.canvas.width, i*100 + (this.y_shift % 100));	
+			this.grid.graphics.moveTo(0,i*gridSize + (this.y_shift % gridSize));
+			this.grid.graphics.lineTo(stage.canvas.width, i*gridSize + (this.y_shift % gridSize));	
 		}
 	}
 
