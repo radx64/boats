@@ -4,11 +4,11 @@
 <head>
     <title>Boats</title>
     <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+    <script src="libs/canvgauge/gauge.js"></script>
     <script src="boat.js"></script>
     <script src="world.js"></script>
+    <script src="obstacle.js"></script>
     <script src="gauges.js"></script>
-    <script src="libs/canvgauge/gauge.js"></script>
-
     <script>
         var speedGauge;
         var steerGauge;
@@ -18,6 +18,16 @@
         var boat;
         var world;
         var keys = {};
+
+        var data = {images: ["assets/rocks.png"],frames: {width:256, height:256},
+            animations: {
+                rock0:0,
+                rock1:5,
+                rock2:9
+            }
+        };
+
+        var spriteSheet = new createjs.SpriteSheet(data);
 
         function keyDown(event)
         {
@@ -43,8 +53,8 @@
         function tick(event) {
             if(createjs.Ticker.getPaused()) return;
             debug.text = "FPS: " + createjs.Ticker.getMeasuredFPS(createjs.Ticker.getTicks(false)).toFixed(1);
-            world.simulate(event);
             boat.simulate(event, keys);
+            world.simulate(event);
             stage.update(event);
             speedGauge.setValue(boat.speed*4.0); 
             steerGauge.setValue(-boat.rudder_direction);
@@ -92,7 +102,7 @@
 <table width="100%">
   <tr>
     <td> 
-        <canvas id="simulationCanvas" width="1000" height="700">
+        <canvas id="simulationCanvas" width="800" height="500">
             alternate content
         </canvas>
     </td>

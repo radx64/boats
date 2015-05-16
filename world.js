@@ -1,4 +1,4 @@
-function World(stage)
+World = function(stage)
 {
 	this.x_shift = 0;
 	this.y_shift = 0;
@@ -21,7 +21,6 @@ function World(stage)
 	this.windArrow.y = -30;
 
 	this.windGraphics.addChild(this.windArrow);
-	//
 
 	this.windSpeedText = new createjs.Text("0.0 knots", "16px monospace", "#FFF");
 	this.windSpeedText.x = 60;
@@ -33,28 +32,29 @@ function World(stage)
 
 
 	this.obstaclesPos = [
-	[300,300],
-	[20,20],
-	[30,30],
-	[40,40]
+	[100,100,0],
+	[250,100,1],
+	[400,100,2],
+	[550,100,1],
+	[300,300,0],
 	];
 
 	this.obstacles = Array();
 
 	for(var i = 0; i<this.obstaclesPos.length; ++i)
 	{
-		this.obstacles[i] = new createjs.Shape();
-    	this.obstacles[i].graphics.beginFill("red").drawCircle(0,0,20);
-    	this.obstacles[i].absolute_x = this.obstaclesPos[i][0];
-    	this.obstacles[i].absolute_y = this.obstaclesPos[i][1];
-    	stage.addChild(this.obstacles[i]);
+		this.obstacles[i] = new Obstacle(stage, this, this.obstaclesPos[i][0], this.obstaclesPos[i][1], this.obstaclesPos[i][2]);
+    	//this.obstacles[i].graphics.beginFill("red").drawCircle(0,0,20);
+    	//this.obstacles[i].absolute_x = this.obstaclesPos[i][0];
+    	//this.obstacles[i].absolute_y = this.obstaclesPos[i][1];
+    	//stage.addChild(this.obstacles[i]);
 	}
 
 	stage.addChild(this.windBack);
 	stage.addChild(this.windGraphics);
 	stage.addChild(this.windSpeedText);
-
 	this.drawGrid = function()
+	
 	{
 		this.grid.graphics.clear();
 		this.grid.graphics.beginStroke("#0077AA");
@@ -75,13 +75,15 @@ function World(stage)
 		}
 	}
 
-	this.drawObstacles = function()
+	this.simulateObstacles = function()
 	{
 		for(var i = 0; i<this.obstacles.length; ++i)
 		{
-			this.obstacles[i].x = (this.obstacles[i].absolute_x + this.x_shift);
-			this.obstacles[i].y = (this.obstacles[i].absolute_y + this.y_shift);
+			this.obstacles[i].simulate();
+			boat.hitWith(this.obstacles[i]);
 		}
+
+
 	}
 
 	this.simulate = function(event)
@@ -101,8 +103,8 @@ function World(stage)
 		this.windGraphics.rotation = this.windDirection;
 
 		this.drawGrid();
-		this.drawObstacles();
-		this.windSpeedText.text  = (this.windSpeed*234).toFixed(1) + " knots"
+		this.simulateObstacles();
+		this.windSpeedText.text  = (this.windSpeed*300).toFixed(1) + " knots"
 
 		// document.getElementById("wind_speed").value = this.windSpeed;
   //       document.getElementById("wind_dir").value = this.windDirection;  
@@ -111,4 +113,8 @@ function World(stage)
   //       document.getElementById("world_y_shift").value = this.y_shift;
 
 	}
+}
+
+function Obstacle(stage)
+{
 }

@@ -1,4 +1,4 @@
-function Boat(stage, world, x, y)
+Boat = function(stage, world, x, y)
 {
     var KEYCODE_SPACE = 32,
         KEYCODE_LEFT = 37, 
@@ -6,7 +6,7 @@ function Boat(stage, world, x, y)
         KEYCODE_UP = 38, 
         KEYCODE_DOWN = 40;
 
-    this.world = world;
+    this.working = true;
 
     this.speed = 0;
     this.direction = 0;
@@ -33,7 +33,7 @@ function Boat(stage, world, x, y)
                             // cause bitmap is not loaded yet and can't get here width and heigth
     this.sprite.y = -90; 
 
-    this.sprite.shadow = new createjs.Shadow("#005588", 10, 10, 30);
+    this.sprite.shadow = new createjs.Shadow("#002244", 10, 10, 30);
 
     this.sail = new createjs.Container();
     this.sail.shadow = new createjs.Shadow("#000000", 5, 5, 30);
@@ -61,7 +61,28 @@ function Boat(stage, world, x, y)
     this.imageObject.addChild(this.sail);
     this.imageObject.addChild(this.rudder);
     this.imageObject.addChild(this.dot);  
-    //this.imageObject.addChild(this.debugBox); 
+
+
+    this.collisionArea1 = new createjs.Shape();
+    this.collisionArea1.x = 0;
+    this.collisionArea1.y = -42;
+    this.collisionArea1.radius = 20;
+    //this.collisionArea1.graphics.beginStroke("blue").drawCircle(0,0,this.collisionArea1.radius);
+    this.imageObject.addChild(this.collisionArea1);
+
+    this.collisionArea2 = new createjs.Shape();
+    this.collisionArea2.x = 0;
+    this.collisionArea2.y = 0;
+    this.collisionArea2.radius = 35;
+    //this.collisionArea2.graphics.beginStroke("blue").drawCircle(0,0,this.collisionArea2.radius);
+    this.imageObject.addChild(this.collisionArea2); 
+
+    this.collisionArea3 = new createjs.Shape();
+    this.collisionArea3.x = 0;
+    this.collisionArea3.y = 50;
+    this.collisionArea3.radius = 35;
+    //this.collisionArea3.graphics.beginStroke("blue").drawCircle(0,0,this.collisionArea3.radius);
+    this.imageObject.addChild(this.collisionArea3); 
 
     stage.addChild(this.imageObject);
 
@@ -82,7 +103,16 @@ function Boat(stage, world, x, y)
     this.simulate = function(event, keys)
     {
         this.processKey(keys);
-        
+
+        if(this.working)
+        {
+
+        }
+        else
+        {
+            this.speed = 0;
+        }
+
 
         if (this.direction >= 360 )
         {
@@ -95,10 +125,10 @@ function Boat(stage, world, x, y)
         }
 
         this.absolute_sail_direction = this.sail_direction + this.direction;
-        this.windForce = Math.sin(toRadians(this.absolute_sail_direction - this.world.windDirection)) * this.world.windSpeed;
-        this.windLongitudinalForce = Math.cos(toRadians(this.direction - this.world.windDirection)) * 0.125;
+        this.windForce = Math.sin(toRadians(this.absolute_sail_direction - world.windDirection)) * world.windSpeed;
+        this.windLongitudinalForce = Math.cos(toRadians(this.direction - world.windDirection)) * 0.125;
         this.sailForce = Math.abs(this.windForce) * this.windLongitudinalForce;
-        this.sailSuctionForce = Math.cos(toRadians(this.absolute_sail_direction - this.world.windDirection + 20.0)) * this.world.windSpeed *0.01;
+        this.sailSuctionForce = Math.cos(toRadians(this.absolute_sail_direction - world.windDirection + 20.0)) * world.windSpeed *0.01;
         this.sailSuctionForce = this.sailSuctionForce > 0 ? this.sailSuctionForce : 0;
         this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.2)) * this.maxDragForce + this.sailSuctionForce;
         this.speed += this.longitudinalForce * event.delta/2.0;
@@ -108,8 +138,8 @@ function Boat(stage, world, x, y)
         this.x += Math.sin(directionInRadians) * this.speed;
         this.y -= Math.cos(directionInRadians) * this.speed;
 
-        this.world.x_shift = - this.x;
-        this.world.y_shift = - this.y;
+        world.x_shift = - this.x;
+        world.y_shift = - this.y;
 
         if (this.speed < 0.0001) this.speed = 0.0;
 
@@ -157,7 +187,34 @@ function Boat(stage, world, x, y)
 
         if(keys[KEYCODE_SPACE])
         {
-            this.sailForce = 1.01; //this is only for DEBUG purposes. Sail force will be calculated with some wind force fiddling
+            this.speed += 1.01; //this is only for DEBUG purposes. Sail force will be calculated with some wind force fiddling
+        }
+    }
+
+    this.detectCollisionOfArea = function(x,y,radius,ownCollsionArea)
+    {
+        var translatedPoint = ownCollsionArea.localToGlobal(0, 0);
+        var dx = translatedPoint.x - (x + world.x_shift);
+        var dy = translatedPoint.y - (y + world.y_shift);
+        var distance = Math.sqrt(dx * dx + dy * dy); 
+
+        if (distance < (ownCollsionArea.radius + radius))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    this.hitWith = function(object)
+    {
+        if (this.detectCollisionOfArea(object.x, object.y, object.radius, this.collisionArea1) ||
+            this.detectCollisionOfArea(object.x, object.y, object.radius, this.collisionArea2) ||
+            this.detectCollisionOfArea(object.x, object.y, object.radius, this.collisionArea3))
+        {
+            this.working = false;   //collided with something
         }
     }
 }

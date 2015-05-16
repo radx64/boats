@@ -1,4 +1,4 @@
-function createSpeedGauge()
+createSpeedGauge = function()
 {
     speedGauge = new Gauge({
     renderTo    : 'speedgauge',
@@ -29,9 +29,9 @@ function createSpeedGauge()
     }
 });
     speedGauge.draw();
-}
+};
 
-function createSteerGauge()
+createSteerGauge = function()
 {
     steerGauge = new Gauge({
     renderTo    : 'steergauge',
@@ -58,7 +58,7 @@ function createSteerGauge()
     }
 });
     speedGauge.draw();
-}
+};
 
 function createSailGauge()
 {
@@ -87,4 +87,4 @@ function createSailGauge()
     }
 });
     speedGauge.draw();
-}
+};
