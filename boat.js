@@ -6,13 +6,16 @@ Boat = function(stage, world, x, y)
         KEYCODE_UP = 38, 
         KEYCODE_DOWN = 40;
 
+//--------------------------------------------SAIL
+    this.sail_max_angle = 80;
+    this.sail_angle = 0;
+    this.sail_side = 1;
+
     this.working = true;
 
     this.speed = 0;
     this.direction = 0;
     this.rudder_direction = 0;
-    this.sail_direction = 180;
-    this.absolute_sail_direction = 0;
     this.x = x;
     this.y = y;
 
@@ -124,6 +127,16 @@ Boat = function(stage, world, x, y)
             this.direction = 360 + this.direction;
         }
 
+        if (this.direction - world.windDirection <= 180)
+        {
+            this.sail_side = 1; // Wind from the right side, sail to the left side
+        }
+        else 
+        {
+            this.sail_side = -1; // Wind from the right side, sail to the left side
+        }
+
+        this.sail_direction = 180 + (this.sail_angle * this.sail_side);
         this.absolute_sail_direction = this.sail_direction + this.direction;
         this.windForce = Math.sin(toRadians(this.absolute_sail_direction - world.windDirection)) * world.windSpeed;
         this.windLongitudinalForce = Math.cos(toRadians(this.direction - world.windDirection)) * 0.125;
@@ -177,12 +190,12 @@ Boat = function(stage, world, x, y)
 
         if(keys[KEYCODE_UP])
         {
-                if(this.sail_direction < 240) this.sail_direction += 2; 
+            if(this.sail_angle < this.sail_max_angle) this.sail_angle += 2; 
         }
 
         if(keys[KEYCODE_DOWN])
         {
-                if(this.sail_direction > 120) this.sail_direction -= 2;
+            if(this.sail_angle > 0) this.sail_angle -= 2;
         }
 
         if(keys[KEYCODE_SPACE])
