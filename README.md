@@ -6,6 +6,6 @@ Boats sailing course in HTML + JS.
 - [x] Basic sailing simulation
 - [x] Sail aerodynamics
 - [x] Centering viewport on boat
-- [ ] GUI support
-- [ ] Collision detection
+- [x] GUI support
+- [x] Collision detection
 - [ ] Scenarios support
