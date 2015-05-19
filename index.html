@@ -58,7 +58,7 @@
             stage.update(event);
             speedGauge.setValue(boat.speed*4.0); 
             steerGauge.setValue(-boat.rudder_direction);
-            sailGauge.setValue(boat.sail_direction-180);
+            sailGauge.setValue(Math.abs(boat.sail_direction-180));
         }
         function init()
         {
