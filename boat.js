@@ -7,9 +7,8 @@ Boat = function(stage, world, x, y)
         KEYCODE_DOWN = 40;
 
 //--------------------------------------------SAIL
-    this.sail_max_angle = 80;
+    this.sail_max_angle = 0;
     this.sail_angle = 0;
-    this.sail_side = 1;
 
     this.working = true;
 
@@ -109,7 +108,7 @@ Boat = function(stage, world, x, y)
 
         if(this.working)
         {
-
+            //some work here
         }
         else
         {
@@ -129,14 +128,20 @@ Boat = function(stage, world, x, y)
 
         if (this.direction - world.windDirection <= 180)
         {
-            this.sail_side = 1; // Wind from the right side, sail to the left side
+            if(this.sail_angle < this.sail_max_angle)
+            {
+                this.sail_angle += 2;
+            }
         }
         else 
         {
-            this.sail_side = -1; // Wind from the right side, sail to the left side
+            if(this.sail_angle > -this.sail_max_angle)
+            {
+                this.sail_angle -= 2;
+            }
         }
 
-        this.sail_direction = 180 + (this.sail_angle * this.sail_side);
+        this.sail_direction = 180 + this.sail_angle;
         this.absolute_sail_direction = this.sail_direction + this.direction;
         this.windForce = Math.sin(toRadians(this.absolute_sail_direction - world.windDirection)) * world.windSpeed;
         this.windLongitudinalForce = Math.cos(toRadians(this.direction - world.windDirection)) * 0.125;
@@ -190,12 +195,34 @@ Boat = function(stage, world, x, y)
 
         if(keys[KEYCODE_UP])
         {
-            if(this.sail_angle < this.sail_max_angle) this.sail_angle += 2; 
+            if(this.sail_max_angle <= 75)
+            {
+                this.sail_max_angle += 1;
+                // if(this.sail_angle > this.sail_max_angle)
+                // {
+                //     this.sail_angle = this.sail_max_angle; 
+                // }
+            }
         }
 
         if(keys[KEYCODE_DOWN])
         {
-            if(this.sail_angle > 0) this.sail_angle -= 2;
+            if(this.sail_max_angle >= 0)
+            {
+                // console.log("MA:" + this.sail_max_angle)
+                // console.log("A: " + this.sail_max_angle)
+                this.sail_max_angle -= 1;
+
+                if(this.sail_angle > this.sail_max_angle)
+                {
+                    this.sail_angle = this.sail_max_angle; 
+                }
+
+                if(this.sail_angle < -this.sail_max_angle)
+                {
+                     this.sail_angle = -this.sail_max_angle; 
+                } 
+            }
         }
 
         if(keys[KEYCODE_SPACE])
