@@ -104,8 +104,6 @@ Boat = function(stage, world, x, y)
 
     this.simulate = function(event, keys)
     {
-        this.processKey(keys);
-
         if(this.working)
         {
             //some work here
@@ -113,8 +111,10 @@ Boat = function(stage, world, x, y)
         else
         {
             this.speed = 0;
+            return; //game over maybe
         }
 
+        this.processKey(keys);
 
         if (this.direction >= 360 )
         {
@@ -250,11 +250,8 @@ Boat = function(stage, world, x, y)
 
     this.hitWith = function(object)
     {
-        if (this.detectCollisionOfArea(object.x, object.y, object.radius, this.collisionArea1) ||
+        return (this.detectCollisionOfArea(object.x, object.y, object.radius, this.collisionArea1) ||
             this.detectCollisionOfArea(object.x, object.y, object.radius, this.collisionArea2) ||
             this.detectCollisionOfArea(object.x, object.y, object.radius, this.collisionArea3))
-        {
-            this.working = false;   //collided with something
-        }
     }
 }

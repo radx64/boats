@@ -43,11 +43,23 @@ World = function(stage)
 
 	for(var i = 0; i<this.obstaclesPos.length; ++i)
 	{
-		this.obstacles[i] = new Obstacle(stage, this, this.obstaclesPos[i][0], this.obstaclesPos[i][1], this.obstaclesPos[i][2]);
-    	//this.obstacles[i].graphics.beginFill("red").drawCircle(0,0,20);
-    	//this.obstacles[i].absolute_x = this.obstaclesPos[i][0];
-    	//this.obstacles[i].absolute_y = this.obstaclesPos[i][1];
-    	//stage.addChild(this.obstacles[i]);
+		this.obstacles[i] = new Obstacle(this.obstaclesPos[i][0], this.obstaclesPos[i][1], this.obstaclesPos[i][2]);
+	}
+
+
+	this.checkpointPositions = [
+	[100,100],
+	[250,250],
+	[100,400],
+	[150,400],
+	[100,300],
+	];
+
+	this.chekpoints = Array();
+
+	for(var i = 0; i<this.checkpointPositions.length; ++i)
+	{
+		this.chekpoints[i] = new Checkpoint(this.checkpointPositions[i][0], this.checkpointPositions[i][1]);
 	}
 
 	stage.addChild(this.windBack);
@@ -80,12 +92,26 @@ World = function(stage)
 		for(var i = 0; i<this.obstacles.length; ++i)
 		{
 			this.obstacles[i].simulate();
-			boat.hitWith(this.obstacles[i]);
+			if(boat.hitWith(this.obstacles[i]))
+			{
+				boat.working = false;
+			}
 		}
-
-
 	}
 
+	this.simulateCheckpoints = function()
+	{
+		for(var i = 0; i<this.chekpoints.length; ++i)
+		{
+			this.chekpoints[i].simulate();
+			if (boat.hitWith(this.chekpoints[i]))
+			{
+				this.chekpoints[i].destroy();
+				this.chekpoints.splice(i,1);
+				break;
+			}
+		}
+	}
 	this.simulate = function(event)
 	{
 		//this.windDirection += 0.4;
@@ -103,6 +129,7 @@ World = function(stage)
 		this.windGraphics.rotation = this.windDirection;
 
 		this.drawGrid();
+		this.simulateCheckpoints();
 		this.simulateObstacles();
 		this.windSpeedText.text  = (this.windSpeed*300).toFixed(1) + " knots"
 
