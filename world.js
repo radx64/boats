@@ -12,6 +12,16 @@ World = function(stage)
 	this.windBack.y = 50;
 	this.windBack.shadow = new createjs.Shadow("#000000", 0, 0, 25);
 
+	this.checkpointsBack = new createjs.Shape()
+	this.checkpointsBack.graphics.beginFill("#222").drawRoundRectComplex(0,0,100,120,15,15,5,5);
+	this.checkpointsBack.x = stage.canvas.width - 150;
+	this.checkpointsBack.y = 50;
+	this.checkpointsBack.shadow = new createjs.Shadow("#000000", 0, 0, 25);
+
+	this.checkpointsCountText = new createjs.Text("0 left", "16px monospace", "#FFF");
+	this.checkpointsCountText.x = stage.canvas.width - 125;
+	this.checkpointsCountText.y = 145;
+
 	this.windGraphics = new createjs.Container();
 	this.windGraphics.x = 100;
 	this.windGraphics.y = 100;
@@ -62,6 +72,8 @@ World = function(stage)
 		this.chekpoints[i] = new Checkpoint(this.checkpointPositions[i][0], this.checkpointPositions[i][1]);
 	}
 
+	stage.addChild(this.checkpointsBack);
+	stage.addChild(this.checkpointsCountText);
 	stage.addChild(this.windBack);
 	stage.addChild(this.windGraphics);
 	stage.addChild(this.windSpeedText);
@@ -132,6 +144,7 @@ World = function(stage)
 		this.simulateCheckpoints();
 		this.simulateObstacles();
 		this.windSpeedText.text  = (this.windSpeed*300).toFixed(1) + " knots"
+		this.checkpointsCountText.text = this.chekpoints.length + " left"
 
 		// document.getElementById("wind_speed").value = this.windSpeed;
   //       document.getElementById("wind_dir").value = this.windDirection;  
