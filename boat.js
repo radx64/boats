@@ -146,7 +146,7 @@ Boat = function(stage, world, x, y)
         this.windForce = Math.sin(toRadians(this.absolute_sail_direction - world.windDirection)) * world.windSpeed;
         this.windLongitudinalForce = Math.cos(toRadians(this.direction - world.windDirection)) * 0.125;
         this.sailForce = Math.abs(this.windForce) * this.windLongitudinalForce;
-        this.sailSuctionForce = Math.cos(toRadians(this.absolute_sail_direction - world.windDirection + 20.0)) * world.windSpeed *0.01;
+        this.sailSuctionForce = Math.cos(toRadians(this.absolute_sail_direction - world.windDirection + 10.0)) * world.windSpeed *0.04;
         this.sailSuctionForce = this.sailSuctionForce > 0 ? this.sailSuctionForce : 0;
         this.longitudinalForce = this.sailForce - (Math.pow(this.speed,1.2)) * this.maxDragForce + this.sailSuctionForce;
         this.speed += this.longitudinalForce * event.delta/2.0;
@@ -166,19 +166,6 @@ Boat = function(stage, world, x, y)
         this.sailPlane.graphics.beginFill("#E6DFC1").bezierCurveTo(0,-80, (Math.random()*6) - 600 *  this.windForce, -40, 0,0);
 
         this.redrawBoat();
-        
-        /* Code below is only for testing purposes. Will be removed when ... probably never :) Nah. Will be.*/
-        // document.getElementById("boat_speed").value = this.speed;
-        // document.getElementById("longitudinal_force").value = this.longitudinalForce;
-        // document.getElementById("boat_direction").value = this.direction;
-        // document.getElementById("sail_dir").value = this.sail_direction;
-        // document.getElementById("abs_sail_dir").value = this.absolute_sail_direction;
-        // document.getElementById("rudder_dir").value = this.rudder_direction;
-        // document.getElementById("boat_x").value = this.x;
-        // document.getElementById("boat_y").value = this.y;
-        // document.getElementById("wind_force").value = this.windForce;
-        // document.getElementById("sail_force").value = this.sailForce;
-        // document.getElementById("sail_suction").value = this.sailSuctionForce;
     }
 
     this.processKey = function(keys)
@@ -198,10 +185,6 @@ Boat = function(stage, world, x, y)
             if(this.sail_max_angle <= 75)
             {
                 this.sail_max_angle += 1;
-                // if(this.sail_angle > this.sail_max_angle)
-                // {
-                //     this.sail_angle = this.sail_max_angle; 
-                // }
             }
         }
 
@@ -209,8 +192,6 @@ Boat = function(stage, world, x, y)
         {
             if(this.sail_max_angle >= 0)
             {
-                // console.log("MA:" + this.sail_max_angle)
-                // console.log("A: " + this.sail_max_angle)
                 this.sail_max_angle -= 1;
 
                 if(this.sail_angle > this.sail_max_angle)
