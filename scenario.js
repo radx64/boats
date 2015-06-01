@@ -1,8 +1,9 @@
 Scenario = function()
 {
-    this.description = "Sample description";
     this.checkpoints = Array();
     this.obstacles = Array();
+    this.windDirection = 0.0;
+    this.windSpeed = 0.0;
 
     this.createCheckpoints = function(checkpointsArray)
     {
@@ -10,11 +11,6 @@ Scenario = function()
         {
             this.checkpoints[i] = new Checkpoint(checkpointsArray[i][0], checkpointsArray[i][1]);
         }
-    }
-
-    this.createDescription = function(descriptionText)
-    {
-        this.description = descriptionText;
     }
 
     this.createObstacles = function(obstacleArray)
@@ -25,4 +21,13 @@ Scenario = function()
         }
     }
 
+    this.setWindDirection = function(dir)
+    {
+        this.windDirection = dir;
+    }
+
+    this.setWindSpeed = function(speed)
+    {
+        this.windSpeed = speed;
+    }
 }

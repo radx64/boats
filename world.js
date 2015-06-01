@@ -1,4 +1,4 @@
-World = function(stage)
+World = function(stage, scenario)
 {
     this.x_shift = 0;
     this.y_shift = 0;
@@ -56,29 +56,12 @@ World = function(stage)
 
     this.grid = new createjs.Shape();
 
-    stage.addChild(this.grid);
+    this.scenario = scenario;
+    this.windSpeed = scenario.windSpeed / 300.0;
+    this.windDirection = scenario.windDirection;
 
-    this.scenario = new Scenario();
+    stage.addChildAt(this.grid,0);
 
-    this.obstaclesPos = [
-    [100,100,0],
-    [250,100,1],
-    [400,100,2],
-    [550,100,1],
-    [300,300,0],
-    ];
-
-    this.scenario.createObstacles(this.obstaclesPos);
-
-    this.checkpointPositions = [
-    [100,0],
-    [0,0],
-    [100,400],
-    [150,400],
-    [100,600],
-    ];
-
-    this.scenario.createCheckpoints(this.checkpointPositions);
 
     stage.addChild(this.checkpointsBack);
     stage.addChild(this.checkpointCircle);
@@ -158,6 +141,14 @@ World = function(stage)
             if(boat.hitWith(this.scenario.obstacles[i]))
             {
                 boat.working = false;
+                if(confirm('Łódź została rozbita! Chcesz powtórzyć?'))
+                {
+                    init();
+                }
+                else
+                {
+                    createjs.Ticker.setPaused(true);
+                }
             }
         }
     }
@@ -177,6 +168,12 @@ World = function(stage)
 
         var direction = this.calculateNearestCheckpointDirection();
         this.nearestCheckpointArrowGraphics.rotation = direction;
+
+        if(this.scenario.checkpoints.length == 0)
+        {
+            alert('Wszystkie punkty kontrolne zostały zaliczone. Gratulacje!');
+            createjs.Ticker.setPaused(true);
+        }
     }
 
     this.simulate = function(event)

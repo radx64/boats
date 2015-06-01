@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Boats</title>
+    <meta charset='utf-8'>
     <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
     <script src="libs/canvgauge/gauge.js"></script>
     <script src="boat.js"></script>
@@ -11,6 +12,7 @@
     <script src="scenario.js"></script>
     <script src="world.js"></script>
     <script src="gauges.js"></script>
+    <script src="level1.js"></script>
     <script>
         var speedGauge;
         var steerGauge;
@@ -43,7 +45,7 @@
 
         function createObjects()
         {
-            world = new World(stage);
+            world = new World(stage, createScenario());
             boat = new Boat(stage, world, 150, 150);
             debug = stage.addChild(new createjs.Text("", "16px monospace", "#000"));
             debug.lineHeight = 15;
@@ -66,8 +68,10 @@
         {
             stage = new createjs.Stage("simulationCanvas");
             createObjects();
+            createjs.Ticker.init();
+            createjs.Ticker.removeAllEventListeners ("tick");
             createjs.Ticker.on("tick", tick);
-            createjs.Ticker.setFPS(45);
+            createjs.Ticker.setFPS(30);
             createSpeedGauge();
             createSteerGauge();
             createSailGauge();
@@ -97,12 +101,12 @@
 
 </head>
 <body onload="init(); " bgcolor="#0099CC">
-<input type="button" value="Pause simulation" id="pauseBtn" onclick="togglePause();"><br>
+<!--<input type="button" value="Pause simulation" id="pauseBtn" onclick="togglePause();"><br> -->
 
 <table width="100%">
   <tr>
     <td> 
-        <canvas id="simulationCanvas" width="900" height="600">
+        <canvas id="simulationCanvas" width="900" height="600" style="border:2px solid #004488;">
             alternate content
         </canvas>
     </td>
