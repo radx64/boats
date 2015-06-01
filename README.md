@@ -8,4 +8,5 @@ Boats sailing course in HTML + JS.
 - [x] Centering viewport on boat
 - [x] GUI support
 - [x] Collision detection
-- [ ] Scenarios support
+- [x] Scenarios support
+- [ ] Write some sailing lessons.
