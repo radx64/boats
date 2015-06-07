@@ -112,7 +112,9 @@
                         upDown = 1;
                     }
                 });
-                
+
+                console.log(row);
+                console.log(cols);
                 $wrapper
                     .width(cols * (combWidth / 4 * 3 + settings.margin) + combWidth / 4)
                     .height((row + 1) * (combHeight + settings.margin) + combHeight / 2);

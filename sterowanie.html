@@ -13,6 +13,7 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/jquery.homeycombs.js"></script>
+    <script src="js/main.js"></script>
     <script src="libs/canvgauge/gauge.js"></script>
     <script src="js/boat.js"></script>
     <script src="js/checkpoint.js"></script>
@@ -110,30 +111,33 @@
 </head>
 <body onload="init(); " bgcolor="#0099CC">
 <!--<input type="button" value="Pause simulation" id="pauseBtn" onclick="togglePause();"><br> -->
-<div class="top"></div>
-    <header>
-        <h1>Sterowanie</h1>
-    </header>
-    <div>
-        <div class="row main-wrap">
-            <div class="large-3 columns">asd</div>
-            <div class="large-6 columns center">
-                <div class="row">
-                        <canvas id="simulationCanvas" width="900" height="600" style="border:2px solid #004488;">
-                            alternate content</canvas>
-                </div>
-                <div class="row">
-                        </canvas><canvas id="speedgauge"></canvas>
-                        <canvas id="steergauge"></canvas>
-                        <canvas id="sailgauge"></canvas>
-                </div>
+    <div class="top"></div>
+    <div class="row main-wrap">
+        <div class="large-3 columns">
+            <div class="navbar">
+                <img src="img/home.png" />
+                <span class="navtext">/ kurs żeglarski</span>
             </div>
-            <div class="large-3 columns">
-                Direction:<br>
-                <input id="slide" type="range" min="0" max="359" step="1" value="180" onchange="changeWindDirection(this.value)"><br>
-                Speed:<br>
-                <input id="slide" type="range" min="0" max="0.08" step="0.001" value="0.06" onchange="changeWindSpeed(this.value)"><br>
+        </div>
+        <div class="large-6 columns">
+            <header>
+                <h1>Sterowanie</h1>
+            </header>
+            <div class="row center">
+                    <canvas id="simulationCanvas" width="900" height="600" style="border:2px solid #004488;">
+                        alternate content</canvas>
             </div>
+            <div class="row center">
+                    </canvas><canvas id="speedgauge"></canvas>
+                    <canvas id="steergauge"></canvas>
+                    <canvas id="sailgauge"></canvas>
+            </div>
+        </div>
+        <div class="large-3 columns">
+            Direction:<br>
+            <input id="slide" type="range" min="0" max="359" step="1" value="180" onchange="changeWindDirection(this.value)"><br>
+            Speed:<br>
+            <input id="slide" type="range" min="0" max="0.08" step="0.001" value="0.06" onchange="changeWindSpeed(this.value)"><br>
         </div>
     </div>
     <footer class="site-footer site-footer-font">

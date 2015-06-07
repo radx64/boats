@@ -12,74 +12,72 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/jquery.homeycombs.js"></script>
+    <script src="js/main.js"></script>
     <script>
         $(document).foundation();
         $(document).ready(function() {
-        $('.honeycombs').honeycombs({
-            combWidth: 250,
-            margin: 30
+            $('.honeycombs').honeycombs({
+                combWidth: 250,
+                margin: 30
+            });
         });
-    });
     </script>
 </head>
 <body>
     <div class="top"></div>
-    <div class="navbar">
-        <img src="img/home.png" />
-        <span class="navtext">/ kurs żeglarski</span>
-    </div>
-    <header>
-        <h1>Kurs Żeglarski</h1>
-    </header>
     <div class="row main-wrap">
-          <div class="small-10 large-8 large-centered small-centered columns center">
-                <div class="honeycombs">
-                    <a href="sterowanie.html">
-                    <div class="comb">
-                        <img src="img/symulator.png" />
-                        <span>STEROWANIE</span>
-                    </div>
-                    </a>
-
-                    <div class="comb">
-                        <img src="img/wezly.png" />
-                        <span>WĘZLY ŻEGLARSKIE</span>
-                    </div>
-
-                    <div class="comb">
-                        <img src="img/budowa.png" />
-                        <span>BUDOWA<br/>JACHTU</span>
-                    </div>
-
-                    <div class="comb">
-                        <img src="img/nawigacja.png" />
-                        <span>NAWIGACJA</span>
-                    </div>
-
-                    <div class="comb">
-                        <img src="img/zagle.png" />
-                        <span>OŻAGLOWANIE</span>
-                    </div>
-
-                    <div class="comb">
-                        <img src="img/terminy.png" />
-                        <span>TERMINY ŻEGLARSKIE</span>
-                    </div>
-
-                    <div class="comb">
-                        <img src="img/locja.png" />
-                        <span>LOCJA</span>
-                    </div>
-
-                    <div class="comb">
-                        <img src="img/szanty.png" />
-                        <span>SZANTY</span>
-                    </div>
-
+        <div class="large-3 columns">
+            <div class="navbar">
+                <img src="img/home.png" />
+                <span class="navtext">/ kurs żeglarski</span>
+            </div>
+        </div>
+        <div class="large-6 end columns">
+            <header>
+                <h1>Kurs Żeglarski</h1>
+            </header>
+            <div class="honeycombs">
+                <div class="comb" href="sterowanie.html">
+                    <img src="img/symulator.png" />
+                    <span>STEROWANIE</span>
                 </div>
-          </div>
+
+                <div class="comb">
+                    <img src="img/wezly.png" />
+                    <span>WĘZLY ŻEGLARSKIE</span>
+                </div>
+
+                <div class="comb">
+                    <img src="img/budowa.png" />
+                    <span>BUDOWA<br/>JACHTU</span>
+                </div>
+
+                <div class="comb">
+                    <img src="img/nawigacja.png" />
+                    <span>NAWIGACJA</span>
+                </div>
+
+                <div class="comb">
+                    <img src="img/zagle.png" />
+                    <span>OŻAGLOWANIE</span>
+                </div>
+
+                <div class="comb">
+                    <img src="img/terminy.png" />
+                    <span>TERMINY ŻEGLARSKIE</span>
+                </div>
+
+                <div class="comb">
+                    <img src="img/locja.png" />
+                    <span>LOCJA</span>
+                </div>
+
+                <div class="comb">
+                    <img src="img/szanty.png" />
+                    <span>SZANTY</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <footer class="site-footer site-footer-font">
-    </footer>
 </body>
 </html>
