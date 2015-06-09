@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sailor</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/swiper.css">
+
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script>
+        $(document).foundation();
+        $(document).ready(function() {
+            var swiper = new Swiper('.swiper-container', {
+                scrollbar: '.swiper-scrollbar',
+                direction: 'horizontal',
+                slidesPerView: 1,
+                mousewheelControl: true,
+                autoplay: 200,
+                effect: 'fade',
+                loop: false,
+                grabCursor: true,
+                touchRatio: 5
+             });
+
+            swiper.on('onReachEnd', function () {
+                swiper.stopAutoplay();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top"></div>
+    <div class="row main-wrap">
+        <div class="large-3 columns">
+            <div class="navbar">
+                <a href="index.html"><img src="img/home.png" /></a>
+                <span class="navtext"><a href="szanty.html">/ szanty</a></span>
+            </div>
+        </div>
+        <div class="large-6 end columns">
+            <header>
+                <h1>Przechyły</h1>
+            </header>
+            <div class="row center">
+                <table class="chord_table">
+                    <tr>
+                        <td>
+Pierwszy raz przy pełnym takielunku <span class="chord">e D e</span><br/>
+Biorę ster i trzymam kurs na wiatr. <span class="chord">e D e</span><br/>
+I jest jak przy pierwszym pocałunku, <span class="chord">a H7 e</span><br/>
+W ustach sól, gorącej wody smak. <span class="chord">a H7 e</span><br/><br/>
+
+O-ho-ho, przechyły i przechyły, <span class="chord">a H7 e</span><br/>
+O-ho-ho, za falą fala mknie, <span class="chord">a H7 e</span><br/>
+O-ho-ho, trzymajcie się dziewczyny - za liny! <span class="chord">a H7 e</span><br/>
+Ale wiatr, ósemka chyba dmie! <span class="chord">a H7 e</span><br/><br/>
+
+Zwrot przez sztag - o'key, zaraz zrobię,<br/>
+Słyszę jak kapitan cicho klnie.<br/>
+Gubię wiatr i zamiast w niego dziobem,<br/>
+To on mnie od tyłu - kumple w śmiech.
+                        </td>
+                        <td>
+Hej, Ty tam, za burtę wychylony,<br/>
+Tu naprawdę się nie ma z czego śmiać.<br/>
+Cicho siedź i lepiej proś Neptuna,<br/>
+Żeby coś nie spadło Ci na kark.<br/><br/>
+
+Krople mgły, w tęczowych kropel pyle<br/>
+Tańczy jacht, po deskach spływa dzień.<br/>
+Jutro znów wypłynę, bo odkryłem,<br/>
+Że wciąż brzmi żeglarska stara pieśń.
+                        </td>
+                    </tr>
+                </table>
+                <iframe style="margin-top:1.5rem" width="420" height="315" src="https://www.youtube.com/embed/f_C75NzNdxo" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

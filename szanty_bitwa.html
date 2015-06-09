@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sailor</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/swiper.css">
+
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script>
+        $(document).foundation();
+        $(document).ready(function() {
+            var swiper = new Swiper('.swiper-container', {
+                scrollbar: '.swiper-scrollbar',
+                direction: 'horizontal',
+                slidesPerView: 1,
+                mousewheelControl: true,
+                autoplay: 200,
+                effect: 'fade',
+                loop: false,
+                grabCursor: true,
+                touchRatio: 5
+             });
+
+            swiper.on('onReachEnd', function () {
+                swiper.stopAutoplay();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top"></div>
+    <div class="row main-wrap">
+        <div class="large-3 columns">
+            <div class="navbar">
+                <a href="index.html"><img src="img/home.png" /></a>
+                <span class="navtext"><a href="szanty.html">/ szanty</a></span>
+            </div>
+        </div>
+        <div class="large-6 end columns">
+            <header>
+                <h1>Bitwa</h1>
+            </header>
+            <div class="row center">
+                <table class="chord_table">
+                    <tr>
+                        <td>
+Okręt nasz wpłynął w mgłę i fregaty dwie <span class="chord">e D C a</span><br/>
+Popłynęły naszym kursem by nie zgubić się. <span class="chord">e D G H</span><br/>
+Potem szkwał wypchnął nas poza mleczny pas <span class="chord">e D C a</span><br/>
+I nikt wtedy nie przypuszczał, że fregaty śmierć nam niosą. <span class="chord">e D G H</span><br/><br/>
+
+Ciepła krew poleje się strugami, <span class="chord">G D e h</span><br/>
+Wygra ten, kto utrzyma ship. <span class="chord">C D e</span><br/>
+W huku dział ktoś przykryje się falami, <span class="chord">G D e h</span><br/>
+Jak da Bóg, ocalimy bryg. <span class="chord">C D e</span><br/><br/>
+
+Nagły huk w uszach grał i już atak trwał, <br/>
+To fregaty uzbrojone rzędem w setkę dział. <br/>
+Czarny dym spowił nas, przyszedł śmierci czas, <br/>
+Krzyk i lament mych kamratów, przerywany ogniem katów.
+
+                            </td>
+                            <td>
+Pocisk nasz trafił w maszt, usłyszałem trzask, <br/>
+To sterburtę rozwaliła jedna z naszych salw. <br/>
+"Żagiel staw" krzyknął ktoś, znów piratów złość, <br/>
+Bo od rufy nam powiało, a fregatom w mordę wiało. <br/><br/>
+
+Z fregat dwóch tylko ta pierwsza w pogoń szła, <br/>
+Wnet abordaż rozpoczęli, gdy dopadli nas. <br/>
+Szyper ich dziury dwie zrobił w swoim dnie, <br/>
+Nie pomogło to psubratom, reszta z rei zwisa za to. <br/><br/>
+
+Po dziś dzień tamtą mgłę i fregaty dwie, <br/>
+Kiedy noc zamyka oczy, widzę w moim śnie. <br/>
+Tamci, co śpią na dnie, uśmiechają się, <br/>
+Że ich straszną śmierć pomścili bracia, którzy zwyciężyli.
+                        </td>
+                    </tr>
+                </table>
+                <iframe style="margin-top:1.5rem" width="560" height="315" src="https://www.youtube.com/embed/nso6Vhg0p9k" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

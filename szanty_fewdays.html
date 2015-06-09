@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sailor</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/swiper.css">
+
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script>
+        $(document).foundation();
+        $(document).ready(function() {
+            var swiper = new Swiper('.swiper-container', {
+                scrollbar: '.swiper-scrollbar',
+                direction: 'horizontal',
+                slidesPerView: 1,
+                mousewheelControl: true,
+                autoplay: 200,
+                effect: 'fade',
+                loop: false,
+                grabCursor: true,
+                touchRatio: 5
+             });
+
+            swiper.on('onReachEnd', function () {
+                swiper.stopAutoplay();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top"></div>
+    <div class="row main-wrap">
+        <div class="large-3 columns">
+            <div class="navbar">
+                <a href="index.html"><img src="img/home.png" /></a>
+                <span class="navtext"><a href="szanty.html">/ szanty</a></span>
+            </div>
+        </div>
+        <div class="large-6 end columns">
+            <header>
+                <h1>A Few Days</h1>
+            </header>
+            <div class="row center">
+                <table style="border:none; margin:auto">
+                    <tr>
+                        <td>
+                O Panie, czemu w ziemi tkwię, <span class="chord">F C F</span><br/>
+                Hej raz, hej raz, <span class="chord">F B</span><br/>
+                I macham szuflą cały dzień? <span class="chord">F C F</span><br/>
+                Hej, na morze czas. <span class="chord">d A7 d</span><br/><br/>
+
+                Mogę kopać tu dalej, <span class="chord">d A7 d</span><br/>
+                Few days, few days, <span class="chord">F B</span><br/>
+                Mogę kopać przez dni parę, <span class="chord">F A7 d</span><br/>
+                Ale wracać chcę. <span class="chord">d A7 d</span><br/><br/>
+
+                Tam każdy takie bajdy plótł,<br/>
+                Nie raz, nie raz,<br/>
+                Przekroczysz Jukon, złota w bród,<br/>
+                Hej, na morze czas.<br/><br/>
+
+                Wykopię jeszcze parę dziur,<br/>
+                Hej raz, hej raz,<br/>
+                Wyciągnę płonnej skały wór,<br/>
+                Hej, na morze czas.
+                        </td>
+                        <td>
+                Za żonę tu łopatę mam,<br/>
+                Już dość, już dość,<br/>
+                A zysk, że jej używam sam,<br/>
+                Hej, na morze czas.<br/><br/>
+
+                O Panie, nie jest to Twój raj,<br/>
+                O nie, o nie,<br/>
+                Nadzieję innym głupcom daj,<br/>
+                Ja na morze chcę.<br/><br/>
+
+                Chociaż już mi wystarczy,<br/>
+                Few days, few days,<br/>
+                Dam Ci jeszcze jedną szansę,<br/>
+                Potem wrócić chcę.<br/><br/>
+
+                Mogę kochać się dalej,<br/>
+                Few days, few days,<br/>
+                Mogę kochać przez dni parę,<br/>
+                Ale wracać chcę.
+                        </td>
+                    </tr>
+                </table>
+                <iframe style="margin-top:1.5rem" width="560" height="315" src="https://www.youtube.com/embed/QMnQF7hjsbI" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
