@@ -36,8 +36,8 @@ World = function(stage, scenario)
 
     this.nearestCheckpointArrowGraphics.addChild(this.nearestCheckpointArrow);
 
-    this.checkpointsCountText = new createjs.Text("0 left", "16px monospace", "#FFF");
-    this.checkpointsCountText.x = stage.canvas.width - 125;
+    this.checkpointsCountText = new createjs.Text("0 pozostało", "16px monospace", "#FFF");
+    this.checkpointsCountText.x = stage.canvas.width - 145;
     this.checkpointsCountText.y = 145;
 
     this.windGraphics = new createjs.Container();
@@ -50,8 +50,8 @@ World = function(stage, scenario)
 
     this.windGraphics.addChild(this.windArrow);
 
-    this.windSpeedText = new createjs.Text("0.0 knots", "16px monospace", "#FFF");
-    this.windSpeedText.x = 60;
+    this.windSpeedText = new createjs.Text("0.0 węzłów", "16px monospace", "#FFF");
+    this.windSpeedText.x = 50;
     this.windSpeedText.y = 145;
 
     this.grid = new createjs.Shape();
@@ -173,6 +173,8 @@ World = function(stage, scenario)
         {
             alert('Wszystkie punkty kontrolne zostały zaliczone. Gratulacje!');
             createjs.Ticker.setPaused(true);
+            window.location.href = this.scenario.nextLevel;
+            return false;
         }
     }
 
@@ -195,7 +197,7 @@ World = function(stage, scenario)
         this.drawGrid();
         this.simulateCheckpoints();
         this.simulateObstacles();
-        this.windSpeedText.text  = (this.windSpeed*300).toFixed(1) + " knots"
-        this.checkpointsCountText.text = this.scenario.checkpoints.length + " left"
+        this.windSpeedText.text  = (this.windSpeed*300).toFixed(1) + " węzłów"
+        this.checkpointsCountText.text = this.scenario.checkpoints.length + " pozostało"
     }
 }
