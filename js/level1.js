@@ -8,7 +8,7 @@ var checkpointPositions = [
 
 level.createCheckpoints(checkpointPositions);
 level.setWindDirection(0);
-level.setWindSpeed(5);
+level.setWindSpeed(12);
 level.setNextLevel("sterowanie_poziom2.html");
 return level;
 }
