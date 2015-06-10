@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sailor</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/swiper.css">
+
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script>
+        $(document).foundation();
+        $(document).ready(function() {
+            var swiper = new Swiper('.swiper-container', {
+                scrollbar: '.swiper-scrollbar',
+                direction: 'horizontal',
+                slidesPerView: 1,
+                mousewheelControl: true,
+                autoplay: 200,
+                effect: 'fade',
+                loop: false,
+                grabCursor: true,
+                touchRatio: 5
+             });
+
+            swiper.on('onReachEnd', function () {
+                swiper.stopAutoplay();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top"></div>
+    <div class="row main-wrap">
+        <div class="large-3 columns">
+            <div class="navbar">
+                <a href="index.html"><img src="img/home.png" /></a>
+                <span class="navtext"><a href="szanty.html">/ szanty</a></span>
+            </div>
+        </div>
+        <div class="large-6 end columns">
+            <header>
+                <h1>Hiszpańskie Dziewczyny</h1>
+            </header>
+            <div class="row center">
+                <table class="chord_table">
+                    <tr>
+                        <td>
+Żegnajcie nam dziś, hiszpańskie dziewczyny, <span class="chord">e C h7</span><br/>
+Żegnajcie nam dziś, marzenia ze snów, <span class="chord">e G D</span><br/>
+Ku brzegom angielskim już ruszać nam pora, <span class="chord">C D e</span><br/>
+Lecz kiedyś na pewno wrócimy tu znów. <span class="chord">C h7 e</span><br/><br/>
+
+I smak waszych ust, hiszpańskie dziewczyny, <span class="chord">e G D</span><br/>
+W noc ciemną i złą nam będzie się śnił. <span class="chord">e G D</span><br/>
+Leniwie popłyną znów rejsu godziny, <span class="chord">C D e</span><br/>
+Wspomnienie ust waszych przysporzy nam sił. <span class="chord">C h7 e</span><br/><br/>
+
+Niedługo ujrzymy znów w dali Cape Deadman <br/>
+I Głowę Baranią sterczącą wśród wzgórz, <br/>
+I statki stojące na redzie przed Plymouth. <br/>
+Klarować kotwicę najwyższy czas już.
+                        </td>
+                        <td>
+A potem znów żagle na masztach rozkwitną, <br/>
+Kurs szyper wyznaczy do Portland i Wight, <br/>
+I znów stara łajba potoczy się ciężko <br/>
+Przez fale w kierunku na Beachie, Fairlee Light. <br/><br/>
+
+Zabłysną nam bielą skał zęby pod Dover <br/>
+I znów noc w kubryku wśród legend i bajd. <br/>
+Powoli i znojnie tak płynie nam życie <br/>
+Na wodach i w portach przy South Foreland Light
+                        </td>
+                    </tr>
+                </table>
+                <iframe style="margin-top:1.5rem" width="420" height="315" src="https://www.youtube.com/embed/0Rdg6GUv-wQ" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</body>
+</html>

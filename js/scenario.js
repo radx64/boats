@@ -30,4 +30,8 @@ Scenario = function()
     {
         this.windSpeed = speed;
     }
+    this.setNextLevel = function(levelLink)
+    {
+        this.nextLevel = levelLink;
+    }
 }

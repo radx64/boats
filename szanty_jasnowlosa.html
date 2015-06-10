@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sailor</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/swiper.css">
+
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script>
+        $(document).foundation();
+        $(document).ready(function() {
+            var swiper = new Swiper('.swiper-container', {
+                scrollbar: '.swiper-scrollbar',
+                direction: 'horizontal',
+                slidesPerView: 1,
+                mousewheelControl: true,
+                autoplay: 200,
+                effect: 'fade',
+                loop: false,
+                grabCursor: true,
+                touchRatio: 5
+             });
+
+            swiper.on('onReachEnd', function () {
+                swiper.stopAutoplay();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="top"></div>
+    <div class="row main-wrap">
+        <div class="large-3 columns">
+            <div class="navbar">
+                <a href="index.html"><img src="img/home.png" /></a>
+                <span class="navtext"><a href="szanty.html">/ szanty</a></span>
+            </div>
+        </div>
+        <div class="large-6 end columns">
+            <header>
+                <h1>Jasnowłosa</h1>
+            </header>
+            <div class="row center">
+                <table class="chord_table">
+                    <tr>
+                        <td>
+Na tańcach ją poznałem, długowłosą blond <span class="chord">G C D G</span><br/>
+Dziewczynę moich marzeń. Nie wiadomo skąd <span class="chord">G e C D7</span><br/>
+Ona się tam wzięła, piękna niczym kwiat. <span class="chord">G e C F D7</span><br/>
+Czy jak syrena wyszła z morza, czy ją przygnał wiatr? <span class="chord">G C D7 G</span><br/><br/>
+
+Żegnaj Irlandio, czas w drogę mi już, <br/>
+W porcie gotowa stoi moja łódź. <br/>
+Na wielki ocean przyjdzie mi zaraz wyjść <br/>
+I pożegnać się z dziewczyną na Lough Sholin.
+                        </td>
+                        <td>
+Ująłem ją za rękę delikatną jak <br/>
+Latem mały motyl albo róży kwiat. <br/>
+Poszedłem z nią na plażę wsłuchać się w szum fal, <br/>
+Pokazałem jasnowłosej wielki morza czar. <br/><br/>
+
+Za moment wypływam w długi, trudy rejs <br/>
+I z piękną mą dziewczyną przyjdzie rozstać się. <br/>
+Żagle pójdą w górę, wiatr mnie pogna w przód <br/>
+I przez morza mnie powiedzie. Ty zostaniesz tu.
+                        </td>
+                    </tr>
+                </table>
+                <iframe style="margin-top:1.5rem" width="420" height="315" src="https://www.youtube.com/embed/lbbCcHevotg" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

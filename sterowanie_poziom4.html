@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sailor</title>
+    <link rel="stylesheet" href="css/homeycombs.css">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/jquery.homeycombs.js"></script>
+    <script src="js/main.js"></script>
+    <script src="libs/canvgauge/gauge.js"></script>
+    <script src="js/boat.js"></script>
+    <script src="js/checkpoint.js"></script>
+    <script src="js/obstacle.js"></script>
+    <script src="js/scenario.js"></script>
+    <script src="js/world.js"></script>
+    <script src="js/gauges.js"></script>
+    <script src="js/level4.js"></script>
+    <script>
+        var speedGauge;
+        var steerGauge;
+        var sailGauge;
+        var stage;
+        var debug;
+        var boat;
+        var world;
+        var keys = {};
+
+        var data = {images: ["assets/rocks.png"],frames: {width:256, height:256},
+            animations: {
+                rock0:0,
+                rock1:5,
+                rock2:9
+            }
+        };
+
+        var spriteSheet = new createjs.SpriteSheet(data);
+
+        function keyDown(event)
+        {
+            keys[event.keyCode] = true;
+        }
+
+        function keyUp(event)
+        {
+            delete keys[event.keyCode];
+        }
+
+        function createObjects()
+        {
+            world = new World(stage, createScenario());
+            boat = new Boat(stage, world, 150, 150);
+            debug = stage.addChild(new createjs.Text("", "16px monospace", "#000"));
+            debug.lineHeight = 15;
+            debug.textBaseline = "top";
+            debug.x = 10;
+            debug.y = debug.lineHeight*3-10;
+        }
+
+        function tick(event) {
+            if(createjs.Ticker.getPaused()) return;
+            debug.text = "FPS: " + createjs.Ticker.getMeasuredFPS(createjs.Ticker.getTicks(false)).toFixed(1);
+            boat.simulate(event, keys);
+            world.simulate(event);
+            stage.update(event);
+            speedGauge.setValue(boat.speed*4.0); 
+            steerGauge.setValue(-boat.rudder_direction);
+            sailGauge.setValue(Math.abs(boat.sail_direction-180));
+        }
+        function init()
+        {
+            stage = new createjs.Stage("simulationCanvas");
+            createObjects();
+            createjs.Ticker.init();
+            createjs.Ticker.removeAllEventListeners ("tick");
+            createjs.Ticker.on("tick", tick);
+            createjs.Ticker.setFPS(30);
+            createSpeedGauge();
+            createSteerGauge();
+            createSailGauge();
+
+            this.document.onkeydown = keyDown;
+            this.document.onkeyup = keyUp;  
+        }
+
+        function togglePause()
+        {
+            var paused = !createjs.Ticker.getPaused();
+            createjs.Ticker.setPaused(paused);
+            document.getElementById("pauseBtn").value = paused ? "Resume simulation" : "Pause simulation";
+        }
+
+        function changeWindDirection(direction)
+        {
+            world.windDirection = direction;
+        }
+
+        function changeWindSpeed(speed)
+        {
+            world.windSpeed = speed
+        }
+
+    </script>
+
+</head>
+<body onload="init(); " bgcolor="#0099CC">
+<!--<input type="button" value="Pause simulation" id="pauseBtn" onclick="togglePause();"><br> -->
+    <div class="top"></div>
+    <div class="row main-wrap">
+        <div class="large-3 columns">
+            <div class="navbar">
+                <a href="index.html"><img src="img/home.png" /></a>
+                <span class="navtext"><a href="sterowanie.html">/ sterowanie</a></span>
+            </div>
+        </div>
+
+        <div class="large-3 columns">
+        </div>
+        <div class="large-6 columns">
+            <header>
+                <h1>Poziom 4 - Zwrot</h1>
+            </header>
+            <div class="row center">
+            <b>Zadanie: </b><br>
+            Twoim zadaniem jest dotarcie przed Tobą omijając skały. Następnie musisz wrócić do punktu który jest teraz na lewej burcie.<br>
+            <b>Sterowanie:</b><br>
+            &uarr; i &darr; zmiana maksymalne wychylenie żagla<br>
+            &larr; i &rarr; zmiana kąta wychylenia steru kierunku<br>
+            </div>
+            <div class="row center">
+                    <canvas id="simulationCanvas" width="800" height="500" style="background-color:#009DFF; border:2px solid #004488;">
+                        alternate content</canvas>
+            </div>
+            <div class="row center">
+                    </canvas><canvas id="speedgauge"></canvas>
+                    <canvas id="steergauge"></canvas>
+                    <canvas id="sailgauge"></canvas>
+            </div>
+        </div>
+
+        <div class="large-3 columns"> <!--
+            Direction:<br>
+            <input id="slide" type="range" min="0" max="359" step="1" value="180" onchange="changeWindDirection(this.value)"><br>
+            Speed:<br>
+            <input id="slide" type="range" min="0" max="0.08" step="0.001" value="0.06" onchange="changeWindSpeed(this.value)"><br>
+            -->
+        </div>
+
+    </div>
+    <footer class="site-footer site-footer-font">
+    </footer>
+</body>
+</html>
